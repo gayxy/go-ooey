@@ -1,0 +1,27 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "zhouwenzhe"
+	email: "zwz0123460218@icloud.com"
+	version: "v1"
+)
+
+type GetScriptInfoRequest {
+	Name string `path:"id"`
+}
+
+type GetScriptInfoResponse {
+}
+
+@server(
+	prefix: ooey/v1
+	group: script
+)
+
+service ooey {
+	@doc "get script info"
+	@handler GetScriptInfoHandler
+	get /scrpt/:id (GetScriptInfoRequest) returns (GetScriptInfoResponse)
+}
