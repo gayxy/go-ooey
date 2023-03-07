@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: greet1
-  namespace: greet-api
+  name: ooey-api
+  namespace: ooey-api
   labels:
-    app: greet1
+    app: ooey-api
 spec:
   replicas: 3
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: greet1
+      app: ooey-api
   template:
     metadata:
       labels:
-        app: greet1
+        app: ooey-api
     spec:
       containers:
-      - name: greet1
+      - name: ooey-api
         image: ./
         lifecycle:
           preStop:
@@ -55,28 +55,28 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: greet1-svc
-  namespace: greet-api
+  name: ooey-api-svc
+  namespace: ooey-api
 spec:
   ports:
     - port: 1001
   selector:
-    app: greet1
+    app: ooey-api
 
 ---
 
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: greet1-hpa-c
-  namespace: greet-api
+  name: ooey-api-hpa-c
+  namespace: ooey-api
   labels:
-    app: greet1-hpa-c
+    app: ooey-api-hpa-c
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: greet1
+    name: ooey-api
   minReplicas: 3
   maxReplicas: 10
   metrics:
@@ -90,15 +90,15 @@ spec:
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: greet1-hpa-m
-  namespace: greet-api
+  name: ooey-api-hpa-m
+  namespace: ooey-api
   labels:
-    app: greet1-hpa-m
+    app: ooey-api-hpa-m
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: greet1
+    name: ooey-api
   minReplicas: 3
   maxReplicas: 10
   metrics:
